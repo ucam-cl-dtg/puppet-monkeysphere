@@ -4,6 +4,7 @@ class monkeysphere::sshd::default(
   $agent_forwarding                  = 'no',
   $tcp_forwarding                    = 'no',
   $x11_forwarding                    = 'no',
+  $use_pam                           = 'no'
 )
 {
   class { "monkeysphere::sshd":
@@ -13,6 +14,7 @@ class monkeysphere::sshd::default(
     tcp_forwarding                   => $tcp_forwarding,
     x11_forwarding                   => $x11_forwarding,
     listen_address                   => $listen_address,
+    use_pam                          => $use_pam,
   }
 }
 
