@@ -3,4 +3,4 @@
 # Hourly: update the per-user authorized_keys in /var based on
 # ~/.monkeysphere/authorized_user_ids
 
-<%= ms_min %> * * * * root /usr/sbin/monkeysphere-authentication update-users 2>/dev/null
+<%= @ms_min %> * * * * root /usr/sbin/monkeysphere-authentication update-users 2>/dev/null

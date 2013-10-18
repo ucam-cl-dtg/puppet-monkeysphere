@@ -12,7 +12,7 @@
 
 # OpenPGP keyserver
 #KEYSERVER=pool.sks-keyservers.net
-<%= 'KEYSERVER='+keyserver if keyserver and keyserver != 'pool.sks-keyservers.net' %>
+<%= 'KEYSERVER='+@keyserver if @keyserver and @keyserver != 'pool.sks-keyservers.net' %>
 # User who controls the monkeysphere 'sphere' keyring.
 #MONKEYSPHERE_USER=monkeysphere
 
