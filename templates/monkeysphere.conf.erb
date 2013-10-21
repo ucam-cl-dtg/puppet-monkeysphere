@@ -18,7 +18,7 @@
 
 # GPG keyserver to search for keys.
 #KEYSERVER=pool.sks-keyservers.net
-<%= 'KEYSERVER='+keyserver if keyserver and keyserver != 'pool.sks-keyservers.net' %>
+<%= 'KEYSERVER='+@keyserver if @keyserver and @keyserver != 'pool.sks-keyservers.net' %>
 # Set whether or not to check keyservers at every monkeysphere
 # interaction, including all ssh connections if you use the
 # monkeysphere ssh-proxycommand.  Leave unset for default behavior
