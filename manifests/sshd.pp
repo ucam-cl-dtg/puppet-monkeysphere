@@ -83,6 +83,13 @@ class monkeysphere::sshd (
     owner   => root, group => 0, mode => 600;
   }
 
+  file { '/etc/ssh/sshd_config.d':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
+  }
+
   service { 'sshd':
     name    => 'ssh',
     enable  => true,

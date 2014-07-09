@@ -217,3 +217,9 @@ AllowGroups <%= allowed_groups %>
 <%- unless @tail_additional_options.to_s.empty? then %>
 <%= tail_additional_options %>
 <%- end %>
+
+# Included files from sshd_conf.d
+<%- Dir.glob("/etc/ssh/sshd_config.d/*.conf").each do |conf_file| -%>
+#<%= conf_file %>
+<%= scope.function_template([conf_file]) %>
+<%- end %>
