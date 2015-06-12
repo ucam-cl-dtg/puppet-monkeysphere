@@ -94,7 +94,6 @@ class monkeysphere::sshd (
     name    => 'ssh',
     enable  => true,
     ensure  => running,
-    hasstatus => true,
     require => File[sshd_config],
   }
 
