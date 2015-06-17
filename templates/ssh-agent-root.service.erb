@@ -1,0 +1,9 @@
+[Unit]
+Description=SSH Agent for root
+
+[Service]
+ExecStartPre=rm -f /root/.ssh-agent-socket/sock
+ExecStart=/usr/bin/ssh-agent -a /root/.ssh-agent-socket/sock sh -c 'echo <%= @passphrase %> | HOME=/root /usr/bin/monkeysphere subkey-to-ssh-agent && while sleep 10000000; do true; done'
+
+[Install]
+WantedBy=multi-user.target

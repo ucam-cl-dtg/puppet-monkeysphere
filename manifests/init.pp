@@ -156,8 +156,7 @@ define monkeysphere::auth_capable_user ( $passphrase, $pseudo_random = false, $h
 
 }
 
-# use runit to maintain - FIXME - only works for root user now
-# fixme - you must have runit installed
+# use systemd to maintain - TODO - only works for root user now
 define monkeysphere::ssh_agent( $passphrase, $ensure = 'running' ) {
   # protected directory to store the ssh-agent socket
   file { "/root/.ssh-agent-socket":
@@ -165,25 +164,17 @@ define monkeysphere::ssh_agent( $passphrase, $ensure = 'running' ) {
     mode => 700,
   }
 
-  # service directory
-  file { "/etc/sv/ssh-agent-root":
-    ensure => "directory",
-    require => [ Package["runit"], Exec["monkeysphere-gen-subkey-root"] ]
-  }
-  
-  file { "/etc/sv/ssh-agent-root/run":
-    ensure => present,
+  file { '/etc/systemd/system/ssh-agent-root.service':
+    ensure => file,
     mode => 755,
-    content => template("monkeysphere/ssh-agent-root.erb"),
+    content => template("monkeysphere/ssh-agent-root.service.erb"),
     owner => "root",
-    require => [  File[ "/etc/sv/ssh-agent-root" ] ]
-  } 
+    require => Exec["monkeysphere-gen-subkey-root"]
+  }
 
-  exec { "update-service --add /etc/sv/ssh-agent-root":
-    creates => "/etc/service/ssh-agent-root",
-    require => [ Package["runit"], File["/etc/sv/ssh-agent-root/run"], File["/root/.ssh-agent-socket"] ],
-    user => "root"
-
+  service {'ssh-agent-root':
+    ensure => 'running',
+    require => File['/etc/systemd/system/ssh-agent-root.service']
   }
 }
 # $user = $name
