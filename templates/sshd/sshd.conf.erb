@@ -195,6 +195,12 @@ UsePAM yes
 UsePAM no
 <%- end -%>
 
+<%- if @use_dns.to_s == 'yes' then -%>
+UseDNS yes
+<%- else -%>
+UseDNS no
+<%- end -%>
+
 <%- if @tcp_forwarding.to_s == 'yes' then -%>
 AllowTcpForwarding yes
 <%- else -%>
