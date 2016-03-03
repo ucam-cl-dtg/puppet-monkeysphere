@@ -189,7 +189,7 @@ define monkeysphere::trusting_user( $passphrase, $home ) {
   }
   # Check we have up to date keys daily
   cron { "refresh-gpg-keys-${user}":
-    command => '/usr/bin/gpg --refresh-keys > /dev/null 2>&1',
+    command => "/usr/bin/gpg --keyserver=${::ms_keyserver} --refresh-keys > /dev/null 2>&1",
     user    => $user,
     hour    => cron_hour("refresh-gpg-keys-${user}"),
     minute  => cron_minute("refresh-gpg-keys-${user}"),
