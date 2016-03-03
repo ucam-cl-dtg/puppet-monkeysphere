@@ -59,7 +59,7 @@ class monkeysphere ($keyserver = "pgp.mit.edu" ) {
   file { '/usr/local/sbin/ms-does-trust-certifiers':
     ensure => file,
     mode   => '0755',
-    source => 'puppet:///modules/monkeysphere/ms-trust-certifiers',
+    source => 'puppet:///modules/monkeysphere/ms-does-trust-certifiers',
   }
   
 }
